@@ -2,8 +2,8 @@
 export const config = {
   // Frontend-safe variables (prefixed with VITE_)
   supabase: {
-    url: import.meta.env.VITE_SUPABASE_URL,
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+    url: import.meta.env.VITE_SUPABASE_URL || 'https://eydtezqkgmubhuzfslwa.supabase.co',
+    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5ZHRlenFrZ211Ymh1emZzbHdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwOTY0OTksImV4cCI6MjA3MjY3MjQ5OX0.7lKt_pH5QGOqTv6pJZg7IPkjLSVHdSootai6_3qHqMA',
   },
   api: {
     baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3001/api',
@@ -14,21 +14,8 @@ export const config = {
   }
 };
 
-// Validate required environment variables
-const requiredEnvVars = [
-  'VITE_SUPABASE_URL',
-  'VITE_SUPABASE_ANON_KEY',
-];
-
-const missingEnvVars = requiredEnvVars.filter(
-  envVar => !import.meta.env[envVar]
-);
-
-if (missingEnvVars.length > 0) {
-  console.error('❌ Missing required environment variables:', missingEnvVars);
-  console.error('📝 Please check your .env file and ensure all required variables are set.');
-}
-
-// Never expose these in frontend!
-// SUPABASE_SERVICE_ROLE_KEY - Backend only
-// ADMIN_KEY - Backend only
+// Debug: Log all environment variables
+console.log('🔍 Environment Variables Debug:');
+console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
+console.log('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'SET' : 'NOT SET');
+console.log('VITE_API_URL:', import.meta.env.VITE_API_URL);
